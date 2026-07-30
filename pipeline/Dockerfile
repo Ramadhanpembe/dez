@@ -10,4 +10,4 @@ COPY src/ src/
 
 RUN uv sync --locked
 
-ENTRYPOINT [ "python", "src/pipeline/pipeline.py" ]
+ENTRYPOINT [ "python", "src/pipeline/ingest_data.py" ]

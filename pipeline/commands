@@ -1,0 +1,36 @@
+#database
+docker run -it --rm \
+--network=pg-network \
+--name=pgdatabase \
+-e POSTGRES_USER="root" \
+-e POSTGRESS_PASSWORD="root" \
+-e POSTGRES_DB="ny_taxi" \
+-v ny_taxi_postgres_data:/var/lib/postgresql \
+-p 5432:5432 \
+postgres:18
+
+
+#pgadmin
+docker run -it --rm \
+--network=pg-network \
+--name pgadmin \
+-e PGADMIN_DEFAULT_EMAIL="admin@admin.com" \
+-e PGADMIN_DEFAULT_PASSWORD="root" \
+-v pgadmin_data:/var/lib/pgadmin \
+-p 8085:80 \
+dpage/pgadmin4
+
+
+#ingestion
+docker run -it --rm \
+ --network=pipeline_default \
+ taxi_ingest:v001 \
+ -u root \
+ -q root \
+ -h pgdatabase \
+ -p 5432 \
+ -d ny_taxi \
+ -t yellow_taxi_trips_2021_1 \
+ -Y 2021 \
+ -M 1
+

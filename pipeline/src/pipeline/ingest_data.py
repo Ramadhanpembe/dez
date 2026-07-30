@@ -1,5 +1,6 @@
+import click
 import pandas as pd
-from tqdm.notebook import tqdm
+from tqdm.auto import tqdm
 from sqlalchemy import create_engine
 
 
@@ -27,23 +28,19 @@ parse_dates = [
     "tpep_dropoff_datetime",
 ]
 
-
-def run():
-    pg_user = "root"
-    pg_pass = "root"
-
-    pg_port = 5432
-    pg_host = "localhost"
-
-    pg_db = "ny_taxi"
-
-    year = 2021
-    month = 1
-
-    target_table = "yellow_taxi_data"
-
-    chunksize = 100000
-
+@click.command()
+@click.option("-u", "--pg-user", default="root", help="PostgreSQL user")
+@click.option("-q", "--pg-pass", default="root", help="PostgreSQL password")
+@click.option("-h", "--pg-host", default="localhost", help="PostgreSQL host")
+@click.option("-p", "--pg-port", default=5432, type=int, help="PostgreSQL port")
+@click.option("-d", "--pg-db", default="ny_taxi", help="PostgreSQL database name")
+@click.option("-y", "-Y", "--year", default=2021, type=int, help="Year of the data")
+@click.option("-m", "-M", "--month", default=1, type=int, help="Month of the data")
+@click.option("-t", "--target-table", default="yellow_taxi_data", help="Target table name")
+@click.option("-s", "--chunksize", default=100000, type=int, help="Chunk size for reading CSV")
+def run(pg_user, pg_pass, pg_host, pg_port, 
+        pg_db, year, month, target_table, chunksize
+    ):
     engine = create_engine(f"postgresql+psycopg://{pg_user}:{pg_pass}@{pg_host}:{pg_port}/{pg_db}")
 
     prefix = "https://github.com/DataTalksClub/nyc-tlc-data/releases/download/yellow/"

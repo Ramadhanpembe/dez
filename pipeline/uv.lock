@@ -1207,6 +1207,7 @@ name = "pipeline"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
+    { name = "click" },
     { name = "pandas" },
     { name = "psycopg", extra = ["binary"] },
     { name = "pyarrow" },
@@ -1222,6 +1223,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
+    { name = "click", specifier = ">=8.4.2" },
     { name = "pandas", specifier = ">=3.0.5" },
     { name = "psycopg", extras = ["binary"], specifier = ">=3.3.4" },
     { name = "pyarrow", specifier = ">=25.0.0" },
