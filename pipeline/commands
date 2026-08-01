@@ -30,7 +30,4 @@ docker run -it --rm \
  -h pgdatabase \
  -p 5432 \
  -d ny_taxi \
- -t yellow_taxi_trips_2021_1 \
- -Y 2021 \
- -M 1
-
+ -t yellow_taxi_trips
