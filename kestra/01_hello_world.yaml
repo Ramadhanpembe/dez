@@ -1,0 +1,29 @@
+id: 01_hello_world
+namespace: zoomcamp
+
+inputs:
+  - id: name
+    type: STRING
+    defaults: Will
+  
+
+tasks:
+  - id: hello_message
+    type: io.kestra.plugin.core.log.Log
+    message: "Hello World"
+  
+  - id: generate_output
+    type: io.kestra.plugin.core.debug.Return
+    format: I was generated during this workflow
+  
+  - id: sleep
+    type: io.kestra.plugin.core.flow.Sleep
+    duration: PT5S
+  
+  - id: log_output
+    type: io.kestra.plugin.core.log.Log
+    message: "This is an output: {{ outputs.generate_output.value }}"
+  
+  - id: goodbye_message
+    type: io.kestra.plugin.core.log.Log
+    message: "Goodbye, {{ inputs.name }}"

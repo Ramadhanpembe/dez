@@ -1,0 +1,48 @@
+- Types of tasks:
+    - Runnable tasks
+    - Flowable tasks
+
+- Types of Triggers:
+    - Schedule triggers:    run your flow on a routine basis
+    - Polling triggers:     periodically check for changes
+    - Realtime triggers:    respond instantly to events
+    - Webhook triggers:     start when an HTTP request is received at a specific endpoint
+    - Flow triggers:        execute when another flow completes
+
+- cron systax "a b c d e"
+    - a: minute
+    - b: hour
+    - c: day of month
+    - d: month
+    - e: day of week
+    - for any parameter, * means all
+
+- Expressions give access to the entire execution context
+    - {{ inputs }}
+    - {{ outputs }}
+    - {{ flow }}
+    - {{ execution }}
+    - {{ trigger }}
+
+- Types of Floawable tasks
+    - Conditional tasks
+        - If
+        - Switch
+    - Looping tasks
+        - ForEach
+        - ForEachItem
+        - LoopUntil
+    - Parallel
+    - Subflow
+
+- Execution States:
+    - Created
+    - Running
+    - Success
+    - Failed
+
+- What Executions track:
+    - Multiple visualization views
+    - Outputs
+    - Metrics
+    - Logs

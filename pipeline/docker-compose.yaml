@@ -5,21 +5,86 @@ services:
       POSTGRES_USER: "root"
       POSTGRES_PASSWORD: "root"
       POSTGRES_DB: "ny_taxi"
-    volumes:
-      - "ny_taxi_postgres_data:/var/lib/postgresql"
     ports:
       - "5432:5432"
+    volumes:
+      - "ny_taxi_postgres_data:/var/lib/postgresql"
+
   
   pgadmin:
     image: dpage/pgadmin4
     environment:
       PGADMIN_DEFAULT_EMAIL: "admin@admin.com"
       PGADMIN_DEFAULT_PASSWORD: "root"
-    volumes:
-      - "pgadmin_data:/var/lib/pgadmin"
     ports:
       - "8085:80"
+    volumes:
+      - "pgadmin_data:/var/lib/pgadmin"
+    depends_on:
+      pgdatabase:
+        condition: service_started
+  
+
+  kestra_postgres:
+    image: postgres:18
+    environment:
+      POSTGRES_DB: kestra
+      POSTGRES_USER: kestra
+      POSTGRES_PASSWORD: kestra
+    volumes:
+      - "kestra_postgres_data:/var/lib/postgresql"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}"]
+      interval: 30s
+      timeout: 10s
+      retries: 10
+  
+
+  kestra:
+    image: kestra/kestra:v1.1
+    pull_policy: always
+    user: "root"
+    command: server standalone
+    environment:
+      KESTRA_CONFIGURATION: |
+        datasources:
+          postgres:
+            url: jdbc:postgresql://kestra_postgres:5432/kestra
+            driverClassName: org.postgresql.Driver
+            username: kestra
+            password: kestra
+        kestra:
+          server:
+            basicAuth:
+              username: "admin@kestra.io" # it must be a valid email address
+              password: Admin1234!
+          repository:
+            type: postgres
+          storage:
+            type: local
+            local:
+              basePath: "/app/storage"
+          queue:
+            type: postgres
+          tasks:
+            tmpDir:
+              path: /tmp/kestra-wd/tmp
+          url: http://localhost:8080/ 
+    ports:
+      - "8080:8080"
+      - "8081:8081"
+    volumes:
+      - "kestra_data:/app/storage"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "kestra_tmp:/tmp/kestra-wd"
+    depends_on:
+      kestra_postgres:
+        condition: service_started
+
 
 volumes:
   ny_taxi_postgres_data:
   pgadmin_data:
+  kestra_postgres_data:
+  kestra_data:
+  kestra_tmp:
