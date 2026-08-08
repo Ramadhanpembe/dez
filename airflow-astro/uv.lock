@@ -33,19 +33,15 @@ wheels = [
 ]
 
 [[package]]
-name = "airflow"
+name = "airflow-astro"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
     { name = "apache-airflow" },
-    { name = "pendulum" },
 ]
 
 [package.metadata]
-requires-dist = [
-    { name = "apache-airflow", specifier = ">=3.3.0" },
-    { name = "pendulum", specifier = ">=3.2.0" },
-]
+requires-dist = [{ name = "apache-airflow", specifier = ">=3.3.0" }]
 
 [[package]]
 name = "alembic"
@@ -182,15 +178,15 @@ wheels = [
 
 [[package]]
 name = "apache-airflow-providers-common-compat"
-version = "1.17.0"
+version = "1.18.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "apache-airflow" },
     { name = "asgiref" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/60/a1/3d652ebee5dff5768062a2e38587d091e738c0a050a88e0791b9a4b4ae93/apache_airflow_providers_common_compat-1.17.0.tar.gz", hash = "sha256:64baaf99ada7fa21c60bef001ce93da52ea9f258d7015855f981eb20ce237f0a", size = 42515, upload-time = "2026-07-28T06:38:35.686Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/69/ab/c2c58f105e16ba2e75371121e72d657189af32fd2bee0b505bc82bc8fbe6/apache_airflow_providers_common_compat-1.18.0.tar.gz", hash = "sha256:30dbdd9a2bd931469b32c180792630f5e6b84e0e908dfc18da51b4beb7dd521f", size = 43604, upload-time = "2026-08-08T03:17:07.126Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/f5/ca/1fbb3668cbc951091989e9ef79dcb8bfd499b453d1863e2f4d659bee6b75/apache_airflow_providers_common_compat-1.17.0-py3-none-any.whl", hash = "sha256:7fe564c8ed1bba6661402795895b333e124e7149ea1e8cffc4931e3589fa418a", size = 44013, upload-time = "2026-07-28T06:37:51.963Z" },
+    { url = "https://files.pythonhosted.org/packages/1d/cf/91dbaa7604f381f8e6d5cb94f6692713ee8b615a16b53563154a61b4c2eb/apache_airflow_providers_common_compat-1.18.0-py3-none-any.whl", hash = "sha256:dcdeda169e5771262969d3b7df2f9eca39c2037977e83560d75de2f0ea3d5787", size = 45013, upload-time = "2026-08-08T03:16:03.389Z" },
 ]
 
 [[package]]
@@ -208,7 +204,7 @@ wheels = [
 
 [[package]]
 name = "apache-airflow-providers-common-sql"
-version = "2.0.3"
+version = "2.1.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "apache-airflow" },
@@ -217,36 +213,36 @@ dependencies = [
     { name = "more-itertools" },
     { name = "sqlparse" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/b5/51/1d35f22bf554aeaea13b9c6ab60cb3d22e632a626e3bcffc1ad037676637/apache_airflow_providers_common_sql-2.0.3.tar.gz", hash = "sha256:3341e191cc8659f58f6c106e429c644c87ccf5dd9174c43b8ec617c6ea679a18", size = 143407, upload-time = "2026-07-28T06:38:36.82Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/ee/47/5a496426ebaef2804b5acebd01ce5c196733f08580571214f3b24f6f5be8/apache_airflow_providers_common_sql-2.1.0.tar.gz", hash = "sha256:2c6053a2753596df2fce834da39d6095063dfae28f417291997b203b60692b9f", size = 145554, upload-time = "2026-08-08T03:17:07.99Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/c7/d2/a22676335f64dfae5f9af3da009026992b635beacae960c6d63171daef5d/apache_airflow_providers_common_sql-2.0.3-py3-none-any.whl", hash = "sha256:4a0c8579595f6c954e4d7135a9591369d99cedd68fce498377d17d7678e1102b", size = 96776, upload-time = "2026-07-28T06:37:53.635Z" },
+    { url = "https://files.pythonhosted.org/packages/51/1b/08a2222c8081591cfa4f6f3daca482e790b54984520be22f6bec9667f18d/apache_airflow_providers_common_sql-2.1.0-py3-none-any.whl", hash = "sha256:1febfbb46b0c4d071f42e5305cf37e73075642e27cccfa0ecfeec87237589ddc", size = 97366, upload-time = "2026-08-08T03:16:04.69Z" },
 ]
 
 [[package]]
 name = "apache-airflow-providers-smtp"
-version = "3.0.2"
+version = "3.0.3"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "aiosmtplib" },
     { name = "apache-airflow" },
     { name = "apache-airflow-providers-common-compat" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/20/a4/e150e61141cf18d99178af544cb89353d4f628690f2d58f891c3923cc226/apache_airflow_providers_smtp-3.0.2.tar.gz", hash = "sha256:69138116969c03609bcfad9d2cc3b95c5426f9ca10be3673d2bfcefe7b3ac53c", size = 47965, upload-time = "2026-07-10T16:28:49.615Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/b0/c5/8b3d7a91512c79ebde0c9c1d30132b98463f1a327ad72ac382d499d2fea1/apache_airflow_providers_smtp-3.0.3.tar.gz", hash = "sha256:3f72dfbe41d5e0a04da2bc9d94c92a52d3625c58108345dbb9d281e55cd27d9d", size = 48239, upload-time = "2026-08-08T03:17:32.926Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/44/a8/146bcdaf0d2e51957239ac394005153eb2318d81276c9c0f3ad201b65692/apache_airflow_providers_smtp-3.0.2-py3-none-any.whl", hash = "sha256:f1f0d612f56849dc82a8fc4bc4d30a6ec2aa0627f78356a2b1a71e89114e6a48", size = 25801, upload-time = "2026-07-10T16:28:17.345Z" },
+    { url = "https://files.pythonhosted.org/packages/7e/73/733ab0f9ec7ea9145949b0ba34a33079e3208d00e16fb6ffcd4a81fdaee5/apache_airflow_providers_smtp-3.0.3-py3-none-any.whl", hash = "sha256:f0da0e9f89c309fd05d66c15ae8dba7e6445faa08a7f7213aff4737d284fb7ed", size = 25803, upload-time = "2026-08-08T03:16:30.705Z" },
 ]
 
 [[package]]
 name = "apache-airflow-providers-standard"
-version = "1.16.0"
+version = "1.17.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "apache-airflow" },
     { name = "apache-airflow-providers-common-compat" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/7c/ac/3c7c8e963ab3bc7a806302f43370b4de1372672b6370232f58505eef881c/apache_airflow_providers_standard-1.16.0.tar.gz", hash = "sha256:a48435726fdcb2328ffaaf7e582d195867b4bdcace8b221a46dd54067f89f577", size = 218230, upload-time = "2026-07-10T16:28:51.126Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/ca/52/9e86845d9e080130e4dd51da277f417d21c559e76b769967d48f147cb22f/apache_airflow_providers_standard-1.17.0.tar.gz", hash = "sha256:d051731aa3802341bb81e2343df0a5430fca76bc6568465ada0b30825f3c8cb1", size = 221899, upload-time = "2026-08-08T03:17:36.111Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/d2/b5/b946dfa600bc7668c44700eaf112901c093d68a54280fbb3d73e01a516f2/apache_airflow_providers_standard-1.16.0-py3-none-any.whl", hash = "sha256:840c4c7e61b94ad018f2527177454648548ebaac4da86858aa331629a1a7b408", size = 161286, upload-time = "2026-07-10T16:28:19.384Z" },
+    { url = "https://files.pythonhosted.org/packages/e2/92/51332b86288d52bf1d646e9741a169892907d343398aba2065e442e2fea2/apache_airflow_providers_standard-1.17.0-py3-none-any.whl", hash = "sha256:f8b0e9624e777ce4a67d730d80d235a29a141e4c32f56002a3799797cd2f71f9", size = 161950, upload-time = "2026-08-08T03:16:34.209Z" },
 ]
 
 [[package]]
@@ -1730,14 +1726,14 @@ wheels = [
 
 [[package]]
 name = "starlette"
-version = "1.4.1"
+version = "1.5.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "anyio" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/0f/3c/76d2fd1f1357ed0f0108d8a5aa233dcf16e2946a8559c84912fe08e01ac7/starlette-1.4.1.tar.gz", hash = "sha256:b7332de6e9375593a29ba9eee1e6ecfeb3eb2043e2e19a13b4b71da73ff35540", size = 2709041, upload-time = "2026-08-05T15:17:26.23Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/92/aa/bf8ead9ed9d965a9290d291c4ac2d30ac1ae1f9b05a1a0ffdf1a05ac8ac6/starlette-1.5.0.tar.gz", hash = "sha256:7d5f63a7e4981a9587fc2a0fbc44cfb6cc4c9181d8c26d7e948871ed5da8c3df", size = 2711789, upload-time = "2026-08-08T07:23:16.504Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/75/0a/67e95f21498de41433babf7b1db0eeab449eb58872dfb831b27747a70fd0/starlette-1.4.1-py3-none-any.whl", hash = "sha256:7d078e0fbefae0d2cecfb80a799d6fb84b1c0c6acd4f14ac79d17d0e7ec27f19", size = 74019, upload-time = "2026-08-05T15:17:24.357Z" },
+    { url = "https://files.pythonhosted.org/packages/e6/6a/a9ff0b4b7603f9498fa419b63ff09e182536ff2f739c85df7f38c0b46781/starlette-1.5.0-py3-none-any.whl", hash = "sha256:9ca76b47375e56f279d7c66651e801ef11167e58557c429be7ec55702d81d4bb", size = 74328, upload-time = "2026-08-08T07:23:14.675Z" },
 ]
 
 [[package]]

@@ -1,0 +1,6 @@
+dev:
+    mode: docker
+project:
+    name: airflow-astro
+webserver:
+    port: "8090"

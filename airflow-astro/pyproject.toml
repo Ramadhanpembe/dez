@@ -1,0 +1,19 @@
+[project]
+name = "airflow-astro"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Ramadhanpembe", email = "63413802+Ramadhanpembe@users.noreply.github.com" }
+]
+requires-python = ">=3.14"
+dependencies = [
+    "apache-airflow>=3.3.0",
+]
+
+[project.scripts]
+airflow-astro = "airflow_astro:main"
+
+[build-system]
+requires = ["uv_build>=0.12.3,<0.13.0"]
+build-backend = "uv_build"
