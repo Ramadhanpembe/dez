@@ -1,0 +1,9 @@
+services:
+  scheduler:
+    networks:
+      - default
+      - pipeline_default
+
+networks:
+  pipeline_default:
+    external: true
