@@ -1,3 +1,7 @@
+# arirflow
+*.json
+*.csv
+
 # terraform
 .terraform/
 *.tfstate

@@ -1,3 +1,4 @@
+import os
 import logging
 
 from airflow.sdk import task, dag, Param
@@ -45,10 +46,11 @@ def work_with_postgres():
 
         return vars
 
-    @task.bash
-    def extract(vars):
-        url = f"https://github.com/DataTalksClub/nyc-tlc-data/releases/download/{vars['taxi']}/{vars['file']}.gz"
-        return f"curl -sL {url} | gunzip > {vars['file']} && echo {vars['file']}"
+    # @task.bash(cwd="/tmp/airflow_data")
+    # def extract(vars):
+    #     os.makedirs(name="/tmp/airflow_data", exist_ok=True)
+    #     url = f"https://github.com/DataTalksClub/nyc-tlc-data/releases/download/{vars['taxi']}/{vars['file']}.gz"
+    #     return f"curl -sL {url} | gunzip > {vars['file']} && echo /tmp/airflow_data/{vars['file']}"
 
     @task
     def yellow_ops(vars):
@@ -108,11 +110,11 @@ def work_with_postgres():
             conn.execute(text(ddl_staging))
 
     vars = build_vars()
-    filepath = extract(vars=vars)
+    # filepath = extract(vars=vars)
 
     yellow_ops(vars)
 
-    logger.info(f"Downloaded dataset: {filepath}")
+    # logger.info(f"Downloaded dataset: {filepath}")
 
 
 work_with_postgres()
