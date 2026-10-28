@@ -1,0 +1,35 @@
+from datetime import datetime
+from dataclasses import dataclass
+
+from kafka import KafkaConsumer
+
+from ..models import ride_deserializer
+
+
+topic_name = "rides"
+server = "localhost:9092"
+
+consumer = KafkaConsumer(
+    topic_name,
+    bootstrap_servers=[server],
+    auto_offset_reset="earliest",
+    group_id="rides-console",
+    value_deserializer=ride_deserializer,
+)
+
+print(f"Listening to {topic_name}...")
+
+count = 0
+
+for message in consumer:
+    ride = message.value
+    pickup_dt = datetime.fromtimestamp(ride.tpep_pickup_datetime / 1000)
+    print(f"Received: PU={ride.PULocationID}, DO={ride.DOLocationID}, "
+          f"distance={ride.trip_distance}, amount=${ride.total_amount:.2f}, "
+          f"pickup={pickup_dt}")
+    count += 1
+    if count >= 1000:
+        print(f"\n... received {count} messages so far (stopping after 10 for demo)")
+        break
+
+consumer.close()

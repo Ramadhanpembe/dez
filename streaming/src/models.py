@@ -1,5 +1,5 @@
 import json
-from dataclasses import dataclass
+from dataclasses import dataclass, asdict
 
 
 @dataclass
@@ -19,6 +19,12 @@ def ride_from_row(row):
         total_amount=float(row.total_amount),
         tpep_pickup_datetime=int(row.tpep_pickup_datetime.timestamp() * 1000),
     )
+
+
+def ride_serializer(ride):
+    ride_dict = asdict(ride)
+    json_str = json.dumps(ride_dict)
+    return json_str.encode("utf-8")
 
 
 def ride_deserializer(data):

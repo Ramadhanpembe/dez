@@ -1,12 +1,11 @@
-import os
 import time
-import json
-import dataclasses
 from dataclasses import dataclass
 
 import pandas as pd
 from pathlib import Path
 from kafka import KafkaProducer
+
+from ..models import Ride, ride_serializer
 
 
 topic_name = "rides"
@@ -20,15 +19,6 @@ columns = ['PULocationID', 'DOLocationID', 'trip_distance', 'total_amount', 'tpe
 df = pd.read_parquet(url, columns=columns).head(1000)
 
 
-@dataclass
-class Ride:
-    PULocationID: int
-    DOLocationID: int
-    trip_distance: float
-    total_amount: float
-    tpep_pickup_datetime: int
-
-
 def ride_from_row(row):
     return Ride(
         PULocationID=int(row.PULocationID),
@@ -37,12 +27,6 @@ def ride_from_row(row):
         total_amount=float(row.total_amount),
         tpep_pickup_datetime=int(row.tpep_pickup_datetime.timestamp() * 1000),
     )
-
-
-def ride_serializer(ride):
-    ride_dict = dataclasses.asdict(ride)
-    json_str = json.dumps(ride_dict)
-    return json_str.encode("utf-8")
 
 
 producer = KafkaProducer(
