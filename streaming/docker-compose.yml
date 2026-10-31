@@ -38,6 +38,8 @@ services:
       - POSTGRES_PASSWORD=postgres
     ports:
       - "5432:5432"
+    volumes:
+      - "streaming_postgres_data:/var/lib/postgresql"
   
   pgadmin:
     image: dpage/pgadmin4
@@ -46,34 +48,45 @@ services:
       PGADMIN_DEFAULT_PASSWORD: "root"
     ports:
       - "8085:80"
+    volumes:
+      - "pgadmin_data:/var/lib/pgadmin"
     depends_on:
       postgres:
         condition: service_started
   
   jobmanager:
-    image: flink:latest
+    build: .
+    image: pyflink-workshop
     ports:
       - "8081:8081"
     command: jobmanager
+    volumes:
+      - ./:/opt/flink/usrlib
+      - ./src:/opt/src
     environment:
       - |
         FLINK_PROPERTIES=
         jobmanager.rpc.address: jobmanager        
 
   taskmanager:
-    image: flink:latest
+    build: .
+    image: pyflink-workshop
     depends_on:
       - jobmanager
     command: taskmanager
     scale: 1
+    volumes:
+      - ./:/opt/flink/usrlib
+      - ./src:/opt/src
     environment:
       - |
         FLINK_PROPERTIES=
         jobmanager.rpc.address: jobmanager
-        taskmanager.numberOfTaskSlots: 2        
+        taskmanager.numberOfTaskSlots: 15       
 
   sql-client:
-    image: flink:latest
+    build: .
+    image: pyflink-workshop
     depends_on:
       - jobmanager
     command: bin/sql-client.sh
@@ -82,4 +95,8 @@ services:
         FLINK_PROPERTIES=
         jobmanager.rpc.address: jobmanager
         rest.address: jobmanager
-      
+
+volumes:
+  streaming_postgres_data:
+  pgadmin_data:
+  
